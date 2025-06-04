@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walden Cannabis - CRM Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo">
+                <span class="logo-text">WALDEN</span>
+                <span class="logo-sub">CANNABIS</span>
+            </div>
+        </div>
+        <div class="nav-center">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search stores, contacts, or orders..." class="search-input">
+                <button class="search-btn">⚡</button>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="nav-icon-btn">
+                <span class="notification-dot"></span>
+                🔔
+            </button>
+            <button class="nav-icon-btn">⚙️</button>
+            <div class="user-profile">
+                <span class="user-name">Sales Rep</span>
+                <div class="user-avatar">S</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </button>
+            <button class="nav-item" data-section="stores">
+                <span class="nav-icon">🏪</span>
+                <span class="nav-text">Store Relationships</span>
+            </button>
+            <button class="nav-item" data-section="priorities">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">Today's Priorities</span>
+            </button>
+            <button class="nav-item" data-section="automation">
+                <span class="nav-icon">🤖</span>
+                <span class="nav-text">Automation Hub</span>
+            </button>
+            <button class="nav-item" data-section="analytics">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Analytics & Reports</span>
+            </button>
+            <button class="nav-item" data-section="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h1 class="section-title">Dashboard Overview</h1>
+                <p class="section-subtitle">Your command center for managing 400+ retail relationships</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">427</div>
+                    <div class="metric-label">Total Stores</div>
+                    <div class="metric-change positive">+12 this month</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">324</div>
+                    <div class="metric-label">Active Relationships</div>
+                    <div class="metric-change positive">+8.3%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">89</div>
+                    <div class="metric-label">This Week's Orders</div>
+                    <div class="metric-change positive">+15.7%</div>
+                </div>
+                <div class="metric-card alert">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">At-Risk Stores</div>
+                    <div class="metric-change negative">Needs attention</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Today's Priorities -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Today's Top Priorities</h3>
+                        <span class="priority-count">3 actions</span>
+                    </div>
+                    <div class="priorities-list" id="prioritiesList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                        <button class="view-all-btn">View All</button>
+                    </div>
+                    <div class="activity-feed" id="activityFeed">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="dashboard-card chart-card">
+                    <div class="card-header">
+                        <h3>Weekly Performance</h3>
+                        <div class="chart-controls">
+                            <button class="chart-btn active">Orders</button>
+                            <button class="chart-btn">Revenue</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Relationships Section -->
+        <section id="stores" class="content-section">
+            <div class="section-header">
+                <h1 class="section-title">Store Relationships</h1>
+                <div class="section-controls">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All Stores</button>
+                        <button class="filter-tab" data-filter="reordering">Reordering</button>
+                        <button class="filter-tab" data-filter="at-risk">At-Risk</button>
+                        <button class="filter-tab" data-filter="warm">Warm</button>
+                        <button class="filter-tab" data-filter="cold">Cold</button>
+                    </div>
+                    <button class="btn-primary">Add Store</button>
+                </div>
+            </div>
+
+            <div class="stores-grid" id="storesGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Today's Priorities Section -->
+        <section id="priorities" class="content-section">
+            <div class="section-header">
+                <h1 class="section-title">Today's Priorities</h1>
+                <p class="section-subtitle">AI-powered recommendations for maximum impact</p>
+            </div>
+
+            <div class="priorities-detailed" id="prioritiesDetailed">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Automation Hub Section -->
+        <section id="automation" class="content-section">
+            <div class="section-header">
+                <h1 class="section-title">Automation Hub</h1>
+                <p class="section-subtitle">Smart triggers and AI-powered outreach</p>
+            </div>
+
+            <div class="automation-grid">
+                <div class="automation-card">
+                    <div class="automation-header">
+                        <h3>Smart Triggers</h3>
+                        <div class="status-indicator active">Active</div>
+                    </div>
+                    <div class="automation-stats">
+                        <div class="stat">
+                            <span class="stat-value">24</span>
+                            <span class="stat-label">Triggers Set</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Actions This Week</span>
+                        </div>
+                    </div>
+                    <div class="automation-actions">
+                        <button class="btn-secondary">Configure</button>
+                    </div>
+                </div>
+
+                <div class="automation-card">
+                    <div class="automation-header">
+                        <h3>GPT Message Generator</h3>
+                        <div class="status-indicator active">Active</div>
+                    </div>
+                    <div class="automation-stats">
+                        <div class="stat">
+                            <span class="stat-value">89</span>
+                            <span class="stat-label">Messages Generated</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">76%</span>
+                            <span class="stat-label">Open Rate</span>
+                        </div>
+                    </div>
+                    <div class="automation-actions">
+                        <button class="btn-secondary">Templates</button>
+                    </div>
+                </div>
+
+                <div class="automation-card">
+                    <div class="automation-header">
+                        <h3>Multi-Channel Delivery</h3>
+                        <div class="status-indicator active">Active</div>
+                    </div>
+                    <div class="channel-status">
+                        <div class="channel">
+                            <span class="channel-name">SMS (Twilio)</span>
+                            <span class="channel-status-dot active"></span>
+                        </div>
+                        <div class="channel">
+                            <span class="channel-name">Email (Apollo)</span>
+                            <span class="channel-status-dot active"></span>
+                        </div>
+                        <div class="channel">
+                            <span class="channel-name">Slack</span>
+                            <span class="channel-status-dot active"></span>
+                        </div>
+                    </div>
+                    <div class="automation-actions">
+                        <button class="btn-secondary">Manage</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="content-section">
+            <div class="section-header">
+                <h1 class="section-title">Analytics & Reports</h1>
+                <p class="section-subtitle">Data-driven insights for strategic decisions</p>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <h3>Revenue Trends</h3>
+                        <select class="time-selector">
+                            <option>Last 30 Days</option>
+                            <option>Last 90 Days</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <h3>Store Performance</h3>
+                    </div>
+                    <div class="performance-list">
+                        <div class="performance-item">
+                            <span class="store-name">Green Valley Dispensary</span>
+                            <span class="performance-value">$15,420</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="store-name">Sunset Wellness Co</span>
+                            <span class="performance-value">$12,300</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="store-name">Mountain Peak Cannabis</span>
+                            <span class="performance-value">$8,750</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="content-section">
+            <div class="section-header">
+                <h1 class="section-title">Settings</h1>
+                <p class="section-subtitle">Configure your CRM preferences</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3>Notification Preferences</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" checked>
+                            <span>Email notifications for new orders</span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" checked>
+                            <span>SMS alerts for at-risk stores</span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox">
+                            <span>Daily priority reports</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Automation Settings</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Auto-follow-up delay:
+                            <select class="setting-select">
+                                <option>2 weeks</option>
+                                <option>3 weeks</option>
+                                <option>1 month</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            Risk threshold:
+                            <select class="setting-select">
+                                <option>30 days</option>
+                                <option>45 days</option>
+                                <option>60 days</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Store Detail Modal -->
+    <div id="storeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalStoreName"></h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
